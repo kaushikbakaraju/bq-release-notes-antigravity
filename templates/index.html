@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Live BigQuery release notes feed — stay up to date with the latest BigQuery updates and share them on Twitter.">
+    <title>BigQuery Release Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-brand">
+                <div class="brand-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#4285F4" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="#34A853" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="#FBBC05" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">BigQuery Release Notes</h1>
+                    <p class="brand-subtitle">Live feed from Google Cloud</p>
+                </div>
+            </div>
+            <button id="refresh-btn" class="refresh-btn" aria-label="Refresh release notes">
+                <span class="refresh-icon" id="refresh-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                </span>
+                <span class="spinner" id="spinner" style="display:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+                        <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"/>
+                    </svg>
+                </span>
+                <span id="refresh-label">Refresh</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div id="error-banner" class="error-banner" style="display:none;" role="alert">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span id="error-message">Failed to load release notes. Please try again.</span>
+        </div>
+
+        <div id="skeleton-container" class="skeleton-container">
+            <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div><div class="skeleton skeleton-body"></div><div class="skeleton skeleton-body short"></div></div>
+            <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div><div class="skeleton skeleton-body"></div><div class="skeleton skeleton-body short"></div></div>
+            <div class="skeleton-card"><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-date"></div><div class="skeleton skeleton-body"></div></div>
+        </div>
+
+        <div id="releases-list" class="releases-list" style="display:none;"></div>
+
+        <div id="count-bar" class="count-bar" style="display:none;">
+            <span id="release-count"></span>
+            <span class="count-bar-dot">•</span>
+            <span>Sorted by latest</span>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Data sourced from <a href="https://cloud.google.com/bigquery/docs/release-notes" target="_blank" rel="noopener">Google Cloud BigQuery Release Notes</a></p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
